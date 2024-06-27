@@ -31,6 +31,7 @@ func main() {
 	app.Use(recover.New())
 	app.Use(logger.New())
 	routes.RegisterRoute(app)
+
 	go func() {
 		log.Fatal(app.Listen(port))
 	}()
