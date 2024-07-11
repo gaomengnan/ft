@@ -28,6 +28,8 @@ func main() {
 
 	app := fiber.New()
 
+	app.Static("/static", "./public/static")
+
 	app.Use(recover.New())
 	app.Use(logger.New())
 	routes.RegisterRoute(app)

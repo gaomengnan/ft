@@ -1,25 +1,67 @@
 package views
 
+import (
+	"strconv"
+	"time"
+)
+
+func version() string {
+	t := time.Now().UnixNano()
+	return strconv.FormatInt(t, 16)
+}
+
 templ template() {
-<!DOCTYPE html>
-<html>
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" data-rh="true" />
-</head>
-
-<body>
-  { children... }
-</body>
-
-</html>
+	<!DOCTYPE html>
+	<html>
+		<head>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0" data-rh="true"/>
+			<link rel="stylesheet" href={ "/static/css/main.css?v=" + version() }/>
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		</head>
+		<body>
+			{ children... }
+		</body>
+	</html>
 }
 
 templ Home() {
-@template() {
-<div>
-  M Home
-</div>
+	@template() {
+		@Nav()
+		<main>
+			M Home
+		</main>
+	}
 }
+
+templ Nav() {
+	@template() {
+		<header>
+			// logo
+			<a href="/" class=" header__logo">
+				<!-- <img src="static/images/logo.png"/> -->
+				<i class="fa-solid fa-g">_</i>
+			</a>
+			// nav
+			<nav class="header__nav">
+				<ul class="header_nav__links">
+					<li>博客</li>
+					<li>工具</li>
+					<li>轨迹</li>
+					<li>学习</li>
+					<li>工作</li>
+					<li>旅游</li>
+				</ul>
+			</nav>
+			// icon
+			<ul class="header__icons">
+				<li><i class="fa-brands fa-github"></i></li>
+				<li><i class="fa-brands fa-youtube"></i></li>
+				<li><i class="fa-brands fa-weixin"></i></li>
+				<li><i class="fa-brands fa-qq"></i></li>
+			</ul>
+			<!-- <div class="header__main"> -->
+			<!-- </div> -->
+		</header>
+	}
 }
