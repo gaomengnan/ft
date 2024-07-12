@@ -13,7 +13,38 @@ func RegisterRoute(app *fiber.App) {
 	})
 
 	app.Get("/home", func(c *fiber.Ctx) error {
-		return Render(c, views.Home())
+		return Render(c, views.Home(""))
+	})
+
+	app.Get("/home/:tab", func(c *fiber.Ctx) error {
+		tab := c.Params("tab")
+		return Render(c, views.Home(tab))
+	})
+
+	app.Post("/home/blog", func(c *fiber.Ctx) error {
+		return Render(c, views.Blog())
+		// templ.Handler(views.Blog(), )
+	})
+
+	app.Post("/home/tool", func(c *fiber.Ctx) error {
+		return Render(c, views.Blog())
+		// templ.Handler(views.Blog(), )
+	})
+	app.Post("/home/road", func(c *fiber.Ctx) error {
+		return Render(c, views.Blog())
+		// templ.Handler(views.Blog(), )
+	})
+	app.Post("/home/work", func(c *fiber.Ctx) error {
+		return Render(c, views.Blog())
+		// templ.Handler(views.Blog(), )
+	})
+	app.Post("/home/learn", func(c *fiber.Ctx) error {
+		return Render(c, views.Blog())
+		// templ.Handler(views.Blog(), )
+	})
+	app.Post("/home/travel", func(c *fiber.Ctx) error {
+		return Render(c, views.Blog())
+		// templ.Handler(views.Blog(), )
 	})
 }
 
