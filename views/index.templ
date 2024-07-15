@@ -1,155 +1,107 @@
 package views
 
 import (
-	"strconv"
-	"time"
+"strconv"
+"time"
 )
 
 func version() string {
-	t := time.Now().UnixNano()
-	return strconv.FormatInt(t, 16)
+t := time.Now().UnixNano()
+return strconv.FormatInt(t, 16)
 }
 
 templ template() {
-	<!DOCTYPE html>
-	<html>
-		<head>
-			<meta charset="UTF-8"/>
-			<meta name="viewport" content="width=device-width, initial-scale=1.0" data-rh="true"/>
-			<link rel="stylesheet" href={ "/static/css/main.css?v=" + version() }/>
-			<link
-				rel="stylesheet"
-				href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-				integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-				crossorigin="anonymous"
-				referrerpolicy="no-referrer"
-			/>
-			<!-- <script src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script> -->
-			<script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js" integrity="sha512-7aWZDAF0AfUGit0ugd2rk8PxytqMiqaEZnUcXmmH0OcF/aGnGa0uQou8MXJthNjNpIC8yI9G9sWvMXXbn0boxg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-			<!-- <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script> -->
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/htmx/2.0.0/htmx.min.js" integrity="sha512-Cpedvic0/Mgc3uRJ5apQ/ZYroPCZpatYEXGJayRaRNjKLaFualFxfxn97LJymznV+nC7y0/Hp/apHNwGpMimuw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-		</head>
-		<body>
-			{ children... }
-		</body>
-		<script type="module" src="/static/js/main.js"></script>
-	</html>
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" data-rh="true" />
+	<link rel="stylesheet" href={ "/static/css/main.css?v=" + version() } />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+		integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<!-- <script src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script> -->
+	<script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"
+		integrity="sha512-7aWZDAF0AfUGit0ugd2rk8PxytqMiqaEZnUcXmmH0OcF/aGnGa0uQou8MXJthNjNpIC8yI9G9sWvMXXbn0boxg=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<!-- <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script> -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/htmx/2.0.0/htmx.min.js"
+		integrity="sha512-Cpedvic0/Mgc3uRJ5apQ/ZYroPCZpatYEXGJayRaRNjKLaFualFxfxn97LJymznV+nC7y0/Hp/apHNwGpMimuw=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+	{ children... }
+</body>
+<script type="module" src="/static/js/main.js"></script>
+
+</html>
 }
 
-templ Home(tab string) {
-	@template() {
-		@Nav(tab)
-		<main class="main">
-			<div class="main__astronaut-model">
-				<model-viewer
-					exposure="2"
-					disable-zoom
-					disable-tap
-					disable-pan
-					rotation-per-second="1.5rad"
-					ar-status="not-presenting"
-					interaction-prompt="none"
-					class="astronaut-viewer"
-					id="astronaut"
-					alt="大赢家"
-					src="/static/assets/solo.glb"
-					camera-controls
-				></model-viewer>
-			</div>
-			<div class="main__container" id="main_content"></div>
-		</main>
-	}
+templ Main(tab string) {
+@template() {
+@Nav(tab)
+<main class="main">
+	<div class="main__astronaut-model">
+		<model-viewer exposure="2" disable-zoom disable-tap disable-pan rotation-per-second="1.5rad"
+			ar-status="not-presenting" interaction-prompt="none" class="astronaut-viewer" id="astronaut" alt="大赢家"
+			src="/static/assets/solo.glb" camera-controls></model-viewer>
+	</div>
+	<div class="main__container" id="main_content">
+		{ children... }
+	</div>
+</main>
+}
 }
 
 func isActive(thisT, tab string) string {
-	if thisT == tab {
-		return "nav-active"
-	}
-	return ""
+if thisT == tab {
+return "nav-active"
+}
+return ""
 }
 
 templ Nav(tab string) {
-	@template() {
-		<header>
-			// logo
-			<a href="/" class=" header__logo">
-				<!-- <img src="static/images/logo.png"/> -->
-				<i class="fa-solid fa-g">_</i>
+@template() {
+<header>
+	// logo
+	<a href="/" class=" header__logo">
+		<!-- <img src="static/images/logo.png"/> -->
+		<i class="fa-solid fa-g">_</i>
+	</a>
+	// nav
+	<nav class="header__nav">
+		<ul id="header_nav" class="header_nav__links" data-tab={tab}>
+			<a href="/home/blog" class={ isActive("blog", tab) }>
+				<li>博客</li>
 			</a>
-			// nav
-			<nav class="header__nav">
-				<ul class="header_nav__links">
-					<a
-						hx-on::after-request="htmx.toggleTab(this);"
-						hx-post="/home/blog"
-						hx-replace-url="/home/blog"
-						hx-trigger="click"
-						hx-target="#main_content"
-						class={ isActive("blog", tab) }
-					>
-						<li>博客</li>
-					</a>
-					<a
-						hx-on::after-request="htmx.toggleTab(this);"
-						hx-replace-url="/home/tool"
-						hx-post="/home/tool"
-						hx-trigger="click"
-						hx-target="#main_content"
-						class={ isActive("tool", tab) }
-					>
-						<li>工具</li>
-					</a>
-					<a
-						hx-on::after-request="htmx.toggleTab(this);"
-						hx-replace-url="/home/road"
-						hx-post="/home/road"
-						hx-trigger="click"
-						hx-target="#main_content"
-						class={ isActive("road", tab) }
-					>
-						<li>轨迹</li>
-					</a>
-					<a
-						hx-on::after-request="htmx.toggleTab(this);"
-						hx-replace-url="/home/learn"
-						hx-post="/home/learn"
-						hx-trigger="click"
-						hx-target="#main_content"
-						class={ isActive("learn", tab) }
-					>
-						<li>学习</li>
-					</a>
-					<a
-						hx-on::after-request="htmx.toggleTab(this);"
-						hx-replace-url="/home/work"
-						hx-post="/home/work"
-						hx-trigger="click"
-						hx-target="#main_content"
-						class={ isActive("work", tab) }
-					>
-						<li>工作</li>
-					</a>
-					<a
-						hx-on::after-request="htmx.toggleTab(this);"
-						hx-replace-url="/home/travel"
-						hx-post="/home/travel"
-						hx-trigger="click"
-						hx-target="#main_content"
-						class={ isActive("travel", tab) }
-					>
-						<li>旅游</li>
-					</a>
-				</ul>
-			</nav>
-			// icon
-			<ul class="header__icons">
-				<li><i class="fa-brands fa-github"></i></li>
-				<li><i class="fa-brands fa-youtube"></i></li>
-				<li><i class="fa-brands fa-weixin"></i></li>
-				<li><i class="fa-brands fa-qq"></i></li>
-			</ul>
-			<!-- <div class="header__main"> -->
-			<!-- </div> -->
-		</header>
-	}
+			<a href="/home/tool" class={ isActive("tool", tab) }>
+				<li>工具</li>
+			</a>
+			<a href="/home/road" class={ isActive("road", tab) }>
+				<li>轨迹</li>
+			</a>
+			<a href="/home/learn" class={ isActive("learn", tab) }>
+				<li>学习</li>
+			</a>
+			<a href="/home/work" class={ isActive("work", tab) }>
+				<li>工作</li>
+			</a>
+			<a href="/home/travel" class={ isActive("travel", tab) }>
+				<li>旅游</li>
+			</a>
+		</ul>
+	</nav>
+	// icon
+	<ul class="header__icons">
+		<li><i class="fa-brands fa-github"></i></li>
+		<li><i class="fa-brands fa-youtube"></i></li>
+		<li><i class="fa-brands fa-weixin"></i></li>
+		<li><i class="fa-brands fa-qq"></i></li>
+	</ul>
+	<!-- <div class="header__main"> -->
+	<!-- </div> -->
+</header>
+}
 }

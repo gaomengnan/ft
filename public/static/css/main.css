@@ -8,7 +8,11 @@
 
 body {
   color: green;
-  background-color: #684eff;
+  /*background-color: #684eff;*/
+  /*background-color: black;*/
+  background-image:url("/static/images/bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
   overflow-x: hidden;
 }
 
@@ -51,13 +55,14 @@ header {
         color: white;
         list-style: none;
         transition: all 0.4s;
-        font-size: 2rem;
+        font-size: 1.8rem;
 
         text-decoration: none;
 
         &:hover {
           color: #fcff7b;
-          font-size: 1.8rem;
+          padding-top: 3px;
+          /*font-size: 2.1rem;*/
         }
       }
     }
@@ -70,7 +75,7 @@ header {
 
     li {
       color: white;
-      font-size: 3rem;
+      font-size: 2rem;
       cursor: pointer;
       transition: all 0.4s;
       text-decoration: none;
@@ -78,7 +83,7 @@ header {
 
       &:hover {
         color: #fcff7b;
-        font-size: 2.8rem;
+        font-size: 2rem;
       }
     }
   }
@@ -106,17 +111,21 @@ header {
   /*background-color: gray;*/
 
   .main__container {
-    border: 1px solid yellow;
+    /*border: 2px solid yellow;*/
     width: 100vw;
+    flex: 3;
   }
 }
 
 .main__astronaut-model {
+  flex: 1;
   height: 35vw;
+  padding-left: 10em;
 
   .astronaut-viewer {
-    width: 23vw;
-    height: 23vh;
+    width: 10vw;
+    height: 40vh;
+    flex: 3 3 auto;
   }
 
   /*img {*/

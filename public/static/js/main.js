@@ -1,5 +1,5 @@
 // #DModel 跟随鼠标旋转功能
-htmx.onLoad(function (content) {
+htmx.onLoad(function (target) {
   const astronaut = document.getElementById("astronaut")
   document.addEventListener("mousemove", (r) => {
     // astronaut.cameraOrbit = `${azimuth}deg ${elevation}deg ${initialDistance}m`;
@@ -9,7 +9,8 @@ htmx.onLoad(function (content) {
   })
 
 
-
+  let currentTab = htmx.find('#header_nav');
+  console.log(currentTab)
 
 })
 htmx.toggleTab = function toggleActiveTab(t) {
